@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pranav Ghaytadkar | Links</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        background: url("snowy.png") no-repeat center center/cover;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 600px;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        z-index: 2;
+      }
+
+      .profile-section {
+        margin-bottom: 1.5rem;
+      }
+
+      .profile-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 20px;
+        object-fit: cover;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 10px;
+      }
+
+      .profile-name {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #88c0d0;
+      }
+
+      .links-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .link-item {
+        width: 85%;
+        max-width: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #333;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .link-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .link-item:active {
+          transform: scale(1.05);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+      }
+
+      .link-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        margin-right: 12px;
+      }
+
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="snowCanvas"></canvas>
+
+    <div class="container">
+      <div class="profile-section">
+        <img src="Profile.jpg" alt="Pranav Ghaytadkar" class="profile-img" />
+        <h1 class="profile-name">Pranav Ghaytadkar</h1>
+      </div>
+
+      <div class="links-container">
+        <a
+          href="https://www.linkedin.com/in/pranav-ghaytadkar-01b17521a/"
+          class="link-item"
+          target="_blank"
+        >
+          <img src="Linkedin.png" alt="LinkedIn" class="link-icon" />
+          <span>LinkedIn</span>
+        </a>
+        <a
+          href="https://github.com/Pranav6715"
+          class="link-item"
+          target="_blank"
+        >
+          <img src="GitHub.png" alt="GitHub" class="link-icon" />
+          <span>GitHub</span>
+        </a>
+        <a
+          href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:9a8143ac-1def-4a5a-97ec-875e8303dd8d"
+          class="link-item"
+          target="_blank"
+        >
+          <img src="cv (1).png" alt="GitHub" class="link-icon" />
+          <span>Resume</span>
+        </a>
+        <a
+          href="https://pranavghaytadkar.netlify.app/"
+          class="link-item"
+          target="_blank"
+        >
+          <img src="Portfolio.png" alt="" class="link-icon" />
+          <span>Portfolio</span>
+        </a>
+        <a
+          href="https://www.instagram.com/pranavghaytadkar_?igsh=eDhmOXBrbnZjaDRv"
+          class="link-item"
+          target="_blank"
+        >
+          <img src="Instagram.png" alt="GitHub" class="link-icon" />
+          <span>Instagram</span>
+        </a>
+        <a
+          href="https://x.com/PGhaytadkar?t=LIKSZeztNKxUR8gZO3duBw&s=08"
+          class="link-item"
+          target="_blank"
+        >
+          <img src="x.png" alt="GitHub" class="link-icon" />
+          <span>X</span>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("snowCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let snowflakes = [];
+
+      function createSnowflakes(count) {
+        for (let i = 0; i < count; i++) {
+          snowflakes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 4 + 1,
+            speedX: Math.random() * 2 - 1,
+            speedY: Math.random() * 3 + 1,
+          });
+        }
+      }
+
+      function drawSnowflakes() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        ctx.beginPath();
+        snowflakes.forEach((flake) => {
+          ctx.moveTo(flake.x, flake.y);
+          ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+        });
+        ctx.fill();
+        updateSnowflakes();
+      }
+
+      function updateSnowflakes() {
+        snowflakes.forEach((flake) => {
+          flake.x += flake.speedX;
+          flake.y += flake.speedY;
+
+          if (flake.y > canvas.height) {
+            flake.y = -flake.radius;
+            flake.x = Math.random() * canvas.width;
+          }
+        });
+      }
+
+      function animate() {
+        drawSnowflakes();
+        requestAnimationFrame(animate);
+      }
+
+      createSnowflakes(100);
+      animate();
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        snowflakes = [];
+        createSnowflakes(100);
+      });
+    </script>
+  </body>
+</html>
