@@ -30,7 +30,7 @@
       .container {
         width: 90%;
         max-width: 600px;
-        padding: 2rem;
+        padding: 1.5rem;
         background: rgba(255, 255, 255, 0.25);
         border-radius: 15px;
         box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -39,6 +39,7 @@
         border: 1px solid rgba(255, 255, 255, 0.3);
         position: relative;
         z-index: 2;
+        margin: 1rem;
       }
 
       .profile-section {
@@ -69,11 +70,11 @@
       }
 
       .link-item {
-        width: 85%;
+        width: 100%;
         max-width: 400px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         padding: 1rem;
         border-radius: 12px;
         text-decoration: none;
@@ -88,18 +89,49 @@
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
       }
 
-      @media (max-width: 768px) {
-        .link-item:active {
-          transform: scale(1.05);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-      }
-
       .link-icon {
         width: 40px;
         height: 40px;
         border-radius: 8px;
         margin-right: 12px;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 480px) {
+        .container {
+          padding: 1rem;
+          width: 95%;
+        }
+
+        .profile-img {
+          width: 100px;
+          height: 100px;
+        }
+
+        .profile-name {
+          font-size: 1.5rem;
+        }
+
+        .link-item {
+          padding: 0.8rem;
+          width: 100%;
+        }
+
+        .link-icon {
+          width: 35px;
+          height: 35px;
+          margin-right: 8px;
+        }
+      }
+
+      @media (max-width: 350px) {
+        .profile-name {
+          font-size: 1.3rem;
+        }
+
+        .link-item {
+          font-size: 0.9rem;
+        }
       }
 
       canvas {
