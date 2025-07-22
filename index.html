@@ -8,131 +8,151 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
     <style>
       * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter", sans-serif;
-}
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
 
-body {
-  background: url("snowy.png") no-repeat center center/cover;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  padding: 1rem;
-}
+      body {
+        background: url("snowy.png") no-repeat center center/cover;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        overflow: hidden;
+        position: relative;
+      }
 
-.container {
-  width: 100%;
-  max-width: 600px;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 15px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-  z-index: 2;
-}
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 0;
+      }
 
-.profile-section {
-  margin-bottom: 1.5rem;
-}
+      .container {
+        width: 100%;
+        max-width: 500px;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        z-index: 2;
+        padding: 2rem;
+      }
 
-.profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 20px;
-  object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px;
-}
+      .profile-section {
+        margin-bottom: 1.5rem;
+      }
 
-.profile-name {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #88c0d0;
-}
+      .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 20px;
+        object-fit: cover;
+        border: 3px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 10px;
+      }
 
-.links-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
+      .profile-name {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #88c0d0;
+      }
 
-.link-item {
-  width: 100%;
-  max-width: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: 12px;
-  text-decoration: none;
-  color: #333;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+      .links-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
 
-.link-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
+      .link-item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 12px;
+        text-decoration: none;
+        color: #333;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
 
-.link-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-}
+      .link-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
 
-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
+      .link-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+      }
 
+      @media (max-width: 768px) {
+        .container {
+          padding: 1.5rem;
+        }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 1.2rem;
-  }
+        .profile-img {
+          width: 80px;
+          height: 80px;
+        }
 
-  .profile-img {
-    width: 80px;
-    height: 80px;
-  }
+        .profile-name {
+          font-size: 1.5rem;
+        }
 
-  .profile-name {
-    font-size: 1.3rem;
-  }
+        .link-item {
+          padding: 0.9rem;
+          font-size: 0.95rem;
+        }
 
-  .link-item {
-    padding: 0.9rem;
-    font-size: 0.95rem;
-  }
+        .link-icon {
+          width: 34px;
+          height: 34px;
+        }
+      }
 
-  .link-icon {
-    width: 34px;
-    height: 34px;
-  }
-}
+      @media (max-width: 480px) {
+        .container {
+          padding: 1rem;
+        }
 
+        .profile-name {
+          font-size: 1.3rem;
+        }
+
+        .link-item {
+          flex-direction: row;
+          justify-content: flex-start;
+          font-size: 0.9rem;
+          padding: 0.8rem;
+        }
+
+        .link-icon {
+          width: 30px;
+          height: 30px;
+        }
+      }
     </style>
   </head>
+
   <body>
     <canvas id="snowCanvas"></canvas>
 
@@ -143,52 +163,28 @@ canvas {
       </div>
 
       <div class="links-container">
-        <a
-          href="https://www.linkedin.com/in/pranav-ghaytadkar-01b17521a/"
-          class="link-item"
-          target="_blank"
-        >
+        <a href="https://www.linkedin.com/in/pranav-ghaytadkar-01b17521a/" class="link-item" target="_blank">
           <img src="Linkedin.png" alt="LinkedIn" class="link-icon" />
           <span>LinkedIn</span>
         </a>
-        <a
-          href="https://github.com/Pranav6715"
-          class="link-item"
-          target="_blank"
-        >
+        <a href="https://github.com/Pranav6715" class="link-item" target="_blank">
           <img src="GitHub.png" alt="GitHub" class="link-icon" />
           <span>GitHub</span>
         </a>
-        <a
-          href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:b4589fbe-e63b-4c52-8d68-524de3548c08"
-          class="link-item"
-          target="_blank"
-        >
-          <img src="cv (1).png" alt="GitHub" class="link-icon" />
+        <a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:b4589fbe-e63b-4c52-8d68-524de3548c08" class="link-item" target="_blank">
+          <img src="cv (1).png" alt="Resume" class="link-icon" />
           <span>Resume</span>
         </a>
-        <a
-          href="https://pranavportfolio018.netlify.app/"
-          class="link-item"
-          target="_blank"
-        >
-          <img src="Portfolio.png" alt="" class="link-icon" />
+        <a href="https://pranavportfolio018.netlify.app/" class="link-item" target="_blank">
+          <img src="Portfolio.png" alt="Portfolio" class="link-icon" />
           <span>Portfolio</span>
         </a>
-        <a
-          href="https://www.instagram.com/pranavghaytadkar_?igsh=eDhmOXBrbnZjaDRv"
-          class="link-item"
-          target="_blank"
-        >
-          <img src="Instagram.png" alt="GitHub" class="link-icon" />
+        <a href="https://www.instagram.com/pranavghaytadkar_?igsh=eDhmOXBrbnZjaDRv" class="link-item" target="_blank">
+          <img src="Instagram.png" alt="Instagram" class="link-icon" />
           <span>Instagram</span>
         </a>
-        <a
-          href="https://x.com/PGhaytadkar?t=LIKSZeztNKxUR8gZO3duBw&s=08"
-          class="link-item"
-          target="_blank"
-        >
-          <img src="x.png" alt="GitHub" class="link-icon" />
+        <a href="https://x.com/PGhaytadkar?t=LIKSZeztNKxUR8gZO3duBw&s=08" class="link-item" target="_blank">
+          <img src="x.png" alt="X" class="link-icon" />
           <span>X</span>
         </a>
       </div>
@@ -198,19 +194,24 @@ canvas {
       const canvas = document.getElementById("snowCanvas");
       const ctx = canvas.getContext("2d");
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      resizeCanvas();
 
       let snowflakes = [];
 
       function createSnowflakes(count) {
+        snowflakes = [];
         for (let i = 0; i < count; i++) {
           snowflakes.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
-            radius: Math.random() * 4 + 1,
-            speedX: Math.random() * 2 - 1,
-            speedY: Math.random() * 3 + 1,
+            radius: Math.random() * 3 + 1,
+            speedX: Math.random() * 1.5 - 0.75,
+            speedY: Math.random() * 2 + 0.5,
           });
         }
       }
@@ -231,7 +232,6 @@ canvas {
         snowflakes.forEach((flake) => {
           flake.x += flake.speedX;
           flake.y += flake.speedY;
-
           if (flake.y > canvas.height) {
             flake.y = -flake.radius;
             flake.x = Math.random() * canvas.width;
@@ -248,9 +248,7 @@ canvas {
       animate();
 
       window.addEventListener("resize", () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        snowflakes = [];
+        resizeCanvas();
         createSnowflakes(100);
       });
     </script>
