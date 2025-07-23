@@ -1,256 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pranav Ghaytadkar | Links</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Inter", sans-serif;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pranav Ghaytadkar | Links</title>
+  <link rel="icon" type="image/png" href="https://img.icons8.com/?size=100&id=x03G5TG9OoEO&format=png&color=000000" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    * {
+      font-family: 'Inter', sans-serif;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      width: 100%;
+      transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #111;
+      background-image: url('snowy.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    body.dark {
+      background-color: #0d1117;
+      color: white;
+      background-image: url('snow.png');
+    }
+
+    #snowCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      background: #ddd;
+      border: none;
+      color: #000;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    body.dark .theme-toggle {
+      background: #333;
+      color: #fff;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .profile-name {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .row {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .link-card {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #000;
+      text-decoration: none;
+      height: 100px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+
+    .link-card:hover {
+      transform: translateY(-3px);
+      background-color: #f0f0f0;
+    }
+
+    .link-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .link-card div:last-child {
+      text-align: left;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .link-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .link-desc {
+      font-size: 0.85rem;
+      color: #444;
+    }
+
+    body.dark .link-card {
+      background-color: #161b22;
+      color: white;
+    }
+
+    body.dark .link-card:hover {
+      background-color: #1e2630;
+    }
+
+    body.dark .link-desc {
+      color: #8b949e;
+    }
+
+    @media (max-width: 768px) {
+      .link-card {
+        flex-direction: row;
+        height: auto;
+        padding: 0.75rem;
+        gap: 0.75rem;
       }
 
-      body {
-        background: url("snowy.png") no-repeat center center/cover;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-        overflow: hidden;
-        position: relative;
+      .link-title {
+        font-size: 1rem;
       }
 
-      canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        pointer-events: none;
-        z-index: 0;
+      .link-desc {
+        font-size: 0.8rem;
       }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="snowCanvas"></canvas>
+  <button class="theme-toggle" id="themeToggle">🌞</button>
 
-      .container {
-        width: 100%;
-        max-width: 500px;
-        background: rgba(255, 255, 255, 0.25);
-        border-radius: 15px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        position: relative;
-        z-index: 2;
-        padding: 2rem;
-      }
-
-      .profile-section {
-        margin-bottom: 1.5rem;
-      }
-
-      .profile-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 20px;
-        object-fit: cover;
-        border: 3px solid rgba(255, 255, 255, 0.5);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        margin-bottom: 10px;
-      }
-
-      .profile-name {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #88c0d0;
-      }
-
-      .links-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        margin-top: 1.5rem;
-      }
-
-      .link-item {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        border-radius: 12px;
-        text-decoration: none;
-        color: #333;
-        background: rgba(255, 255, 255, 0.85);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .link-item:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-      }
-
-      .link-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          padding: 1.5rem;
-        }
-
-        .profile-img {
-          width: 80px;
-          height: 80px;
-        }
-
-        .profile-name {
-          font-size: 1.5rem;
-        }
-
-        .link-item {
-          padding: 0.9rem;
-          font-size: 0.95rem;
-        }
-
-        .link-icon {
-          width: 34px;
-          height: 34px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .container {
-          padding: 1rem;
-        }
-
-        .profile-name {
-          font-size: 1.3rem;
-        }
-
-        .link-item {
-          flex-direction: row;
-          justify-content: flex-start;
-          font-size: 0.9rem;
-          padding: 0.8rem;
-        }
-
-        .link-icon {
-          width: 30px;
-          height: 30px;
-        }
-      }
-    </style>
-  </head>
-
-  <body>
-    <canvas id="snowCanvas"></canvas>
-
-    <div class="container">
-      <div class="profile-section">
-        <img src="Profile.jpg" alt="Pranav Ghaytadkar" class="profile-img" />
-        <h1 class="profile-name">Pranav Ghaytadkar</h1>
+  <div class="main-content container">
+    <div class="profile-name">Pranav Ghaytadkar</div>
+    <div class="row gy-3 justify-content-center">
+      <div class="col-md-4 col-sm-6">
+        <a href="https://github.com/Pranav6715" class="link-card">
+          <img src="GitHub.png" class="link-icon" alt="GitHub" />
+          <div>
+            <div class="link-title">GitHub</div>
+            <div class="link-desc">@Pranav6715 | Projects & Code</div>
+          </div>
+        </a>
       </div>
-
-      <div class="links-container">
-        <a href="https://www.linkedin.com/in/pranav-ghaytadkar-01b17521a/" class="link-item" target="_blank">
-          <img src="Linkedin.png" alt="LinkedIn" class="link-icon" />
-          <span>LinkedIn</span>
+      <div class="col-md-4 col-sm-6">
+        <a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:b4589fbe-e63b-4c52-8d68-524de3548c08" class="link-card">
+          <img src="cv (1).png" class="link-icon" alt="Resume" />
+          <div>
+            <div class="link-title">Resume</div>
+            <div class="link-desc">View my resume 📄</div>
+          </div>
         </a>
-        <a href="https://github.com/Pranav6715" class="link-item" target="_blank">
-          <img src="GitHub.png" alt="GitHub" class="link-icon" />
-          <span>GitHub</span>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <a href="https://pranavportfolio018.netlify.app/" class="link-card">
+          <img src="Portfolio.png" class="link-icon" alt="Portfolio" />
+          <div>
+            <div class="link-title">Portfolio</div>
+            <div class="link-desc">Look at my work!</div>
+          </div>
         </a>
-        <a href="https://acrobat.adobe.com/id/urn:aaid:sc:AP:b4589fbe-e63b-4c52-8d68-524de3548c08" class="link-item" target="_blank">
-          <img src="cv (1).png" alt="Resume" class="link-icon" />
-          <span>Resume</span>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <a href="https://www.linkedin.com/in/pranav-ghaytadkar" class="link-card">
+          <img src="linkedin.png" class="link-icon" alt="LinkedIn" />
+          <div>
+            <div class="link-title">LinkedIn</div>
+            <div class="link-desc">Connect professionally 💼</div>
+          </div>
         </a>
-        <a href="https://pranavportfolio018.netlify.app/" class="link-item" target="_blank">
-          <img src="Portfolio.png" alt="Portfolio" class="link-icon" />
-          <span>Portfolio</span>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <a href="https://www.instagram.com/pranavghaytadkar_?igsh=eDhmOXBrbnZjaDRv" class="link-card">
+          <img src="Instagram.png" class="link-icon" alt="Instagram" />
+          <div>
+            <div class="link-title">Instagram</div>
+            <div class="link-desc">Shots of my life 📸</div>
+          </div>
         </a>
-        <a href="https://www.instagram.com/pranavghaytadkar_?igsh=eDhmOXBrbnZjaDRv" class="link-item" target="_blank">
-          <img src="Instagram.png" alt="Instagram" class="link-icon" />
-          <span>Instagram</span>
-        </a>
-        <a href="https://x.com/PGhaytadkar?t=LIKSZeztNKxUR8gZO3duBw&s=08" class="link-item" target="_blank">
-          <img src="x.png" alt="X" class="link-icon" />
-          <span>X</span>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <a href="https://x.com/PGhaytadkar?t=LIKSZeztNKxUR8gZO3duBw&s=08" class="link-card">
+          <img src="x.png" class="link-icon" alt="Twitter" />
+          <div>
+            <div class="link-title">X</div>
+            <div class="link-desc">@PGhaytadkar | Tweets & thoughts</div>
+          </div>
         </a>
       </div>
     </div>
+  </div>
 
-    <script>
-      const canvas = document.getElementById("snowCanvas");
+  <script>
+    const themeToggle = document.getElementById("themeToggle");
+    const snowCanvas = document.getElementById("snowCanvas");
+
+    function startSnow() {
+      const canvas = snowCanvas;
       const ctx = canvas.getContext("2d");
-
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-
-      resizeCanvas();
-
+      let width = window.innerWidth;
+      let height = window.innerHeight;
       let snowflakes = [];
+
+      canvas.width = width;
+      canvas.height = height;
 
       function createSnowflakes(count) {
         snowflakes = [];
         for (let i = 0; i < count; i++) {
           snowflakes.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 3 + 1,
-            speedX: Math.random() * 1.5 - 0.75,
-            speedY: Math.random() * 2 + 0.5,
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: Math.random() * 4 + 1,
+            d: Math.random() * count
           });
         }
       }
 
       function drawSnowflakes() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, width, height);
         ctx.fillStyle = "white";
         ctx.beginPath();
-        snowflakes.forEach((flake) => {
-          ctx.moveTo(flake.x, flake.y);
-          ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
-        });
+        for (let i = 0; i < snowflakes.length; i++) {
+          const f = snowflakes[i];
+          ctx.moveTo(f.x, f.y);
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+        }
         ctx.fill();
-        updateSnowflakes();
+        moveSnowflakes();
       }
 
-      function updateSnowflakes() {
-        snowflakes.forEach((flake) => {
-          flake.x += flake.speedX;
-          flake.y += flake.speedY;
-          if (flake.y > canvas.height) {
-            flake.y = -flake.radius;
-            flake.x = Math.random() * canvas.width;
+      let angle = 0;
+      function moveSnowflakes() {
+        angle += 0.01;
+        for (let i = 0; i < snowflakes.length; i++) {
+          const f = snowflakes[i];
+          f.y += Math.cos(angle + f.d) + 1 + f.r / 2;
+          f.x += Math.sin(angle) * 2;
+
+          if (f.x > width + 5 || f.x < -5 || f.y > height) {
+            snowflakes[i] = {
+              x: Math.random() * width,
+              y: -10,
+              r: f.r,
+              d: f.d
+            };
           }
-        });
+        }
       }
 
-      function animate() {
+      function animateSnow() {
         drawSnowflakes();
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateSnow);
       }
 
       createSnowflakes(100);
-      animate();
+      animateSnow();
 
       window.addEventListener("resize", () => {
-        resizeCanvas();
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
         createSnowflakes(100);
       });
-    </script>
-  </body>
+    }
+
+    startSnow();
+
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      themeToggle.textContent = document.body.classList.contains("dark") ? "🌙" : "🌞";
+    });
+  </script>
+</body>
 </html>
